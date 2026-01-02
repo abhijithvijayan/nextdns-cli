@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      # Give permission to mint an ID-token for publishing package with provenance
+      # Required for npm OIDC trusted publishing
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -27,9 +27,8 @@ jobs:
       - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-          scope: "@nextdns-manager"
 
       - name: Install dependencies
         working-directory: source/cli
@@ -43,12 +42,11 @@ jobs:
         working-directory: source/cli
         run: npm run build
 
-      - name: Publish
+      # npm CLI v11.5.1+ required for OIDC trusted publishing
+      # Provenance is automatic with trusted publishing
+      - name: Publish with OIDC
         working-directory: source/cli
-        # https://docs.npmjs.com/generating-provenance-statements
-        run: npm publish --provenance --access public --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --ignore-scripts
 
   # Notification Job
   notify_job:

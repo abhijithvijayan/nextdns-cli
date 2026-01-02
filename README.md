@@ -1,8 +1,8 @@
 <h1 align="center">nextdns-manager</h1>
 <p align="center">CLI and Web tools for managing NextDNS profiles</p>
 <div align="center">
-  <a href="https://github.com/abhijithvijayan/nextdns-manager/actions/workflows/test.yml">
-    <img src="https://github.com/abhijithvijayan/nextdns-manager/actions/workflows/test.yml/badge.svg" alt="Tests" />
+  <a href="https://www.npmjs.com/package/nextdns-manager-cli">
+    <img src="https://img.shields.io/npm/v/nextdns-manager-cli.svg" alt="NPM Version" />
   </a>
   <a href="https://github.com/abhijithvijayan/nextdns-manager/blob/main/license">
     <img src="https://img.shields.io/github/license/abhijithvijayan/nextdns-manager.svg" alt="LICENSE" />
@@ -27,7 +27,6 @@
 ## Table of Contents
 
 - [Features](#features)
-- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Manage Domain](#manage-domain)
@@ -36,7 +35,6 @@
   - [Copy Profile](#copy-profile)
 - [Web App](#web-app)
 - [API Documentation](#api-documentation)
-- [Running Tests](#running-tests)
 - [Issues](#issues)
 - [License](#license)
 
@@ -55,48 +53,18 @@
 - Automatic verification of cloned profiles
 - Schema validation to detect API changes
 
-## Project Structure
-
-```
-source/
-├── core/           # Shared TypeScript library (used by CLI and Web)
-│   ├── api.ts          # NextDNS API client with injectable HTTP adapter
-│   ├── types.ts        # Shared TypeScript types
-│   ├── manage-domain.ts
-│   ├── sync-lists.ts
-│   ├── diff-profiles.ts
-│   ├── copy-profile.ts
-│   └── index.ts        # Public exports
-├── cli/            # Node.js CLI application
-│   └── src/
-│       ├── index.ts        # CLI entry point
-│       └── commands/       # Command implementations
-└── web/            # Next.js web application
-    └── src/
-        └── lib/api.ts      # Web-specific API adapter (Cloudflare proxy)
-```
-
 ## Installation
 
 Requires Node.js 18 or later.
 
 ```sh
-cd source/cli
-npm install
-npm run build
+npm install -g nextdns-manager-cli
 ```
 
-Run commands with:
+Or run directly with npx:
 
 ```sh
-node dist/cli/src/index.js <command> [options]
-```
-
-Or link globally:
-
-```sh
-npm link
-nextdns <command> [options]
+npx nextdns-manager-cli <command> [options]
 ```
 
 ## Usage
@@ -245,15 +213,13 @@ nextdns copy -s "source-api-key" -d "dest-api-key" -p "a1b2c3"
 
 ## Web App
 
-A Next.js web application is available in `source/web/` that uses the shared core library with a Cloudflare Workers proxy.
+A Next.js web application is available in `source/web/` that provides a graphical interface for all CLI features.
 
 ```sh
 cd source/web
 npm install
 npm run dev
 ```
-
-The web app routes API calls through `/api/nextdns` to a Cloudflare Worker that handles authentication.
 
 ## Fields Copied
 
@@ -333,13 +299,6 @@ This script may be outdated and missing new NextDNS features.
   - Unknown field(s) at 'security': newFeature
 
 To proceed anyway, use the --force flag.
-```
-
-## Running Tests
-
-```sh
-cd source/cli
-npm test
 ```
 
 ## API Documentation
