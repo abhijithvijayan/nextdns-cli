@@ -101,15 +101,12 @@ export function ManageDomain() {
       return;
     }
 
-    const targetProfiles =
-      selectedProfiles.length > 0
-        ? profiles.filter((p) => selectedProfiles.includes(p.id))
-        : profiles;
-
-    if (targetProfiles.length === 0) {
-      setError('No profiles selected');
+    if (selectedProfiles.length === 0) {
+      setError('Please select at least one profile');
       return;
     }
+
+    const targetProfiles = profiles.filter((p) => selectedProfiles.includes(p.id));
 
     setIsRunning(true);
 
@@ -198,9 +195,7 @@ export function ManageDomain() {
                 <label className={styles.label}>
                   Target Profiles
                   <span className={styles.hint}>
-                    {selectedProfiles.length === 0
-                      ? '(All profiles)'
-                      : `(${selectedProfiles.length} selected)`}
+                    ({selectedProfiles.length} selected)
                   </span>
                 </label>
                 <button
@@ -232,11 +227,14 @@ export function ManageDomain() {
           </div>
 
           <div className={styles.formActions}>
-            <Button type="submit" isLoading={isRunning} size="large">
+            <Button
+              type="submit"
+              isLoading={isRunning}
+              disabled={selectedProfiles.length === 0}
+              size="large"
+            >
               {isRunning
-                ? `Processing... (${results.length}/${
-                    selectedProfiles.length || profiles.length
-                  })`
+                ? `Processing... (${results.length}/${selectedProfiles.length})`
                 : `${action.charAt(0).toUpperCase() + action.slice(1)} Domain`}
             </Button>
           </div>

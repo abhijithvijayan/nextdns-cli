@@ -54,17 +54,23 @@ export function DiffProfiles() {
     );
   };
 
+  const handleSelectAll = () => {
+    if (selectedProfiles.length === profiles.length) {
+      setSelectedProfiles([]);
+    } else {
+      setSelectedProfiles(profiles.map((p) => p.id));
+    }
+  };
+
   const fetchData = async () => {
     setError('');
-    const targetProfiles =
-      selectedProfiles.length >= 2
-        ? profiles.filter((p) => selectedProfiles.includes(p.id))
-        : profiles;
 
-    if (targetProfiles.length < 2) {
-      setError('Need at least 2 profiles to compare');
+    if (selectedProfiles.length < 2) {
+      setError('Please select at least 2 profiles to compare');
       return;
     }
+
+    const targetProfiles = profiles.filter((p) => selectedProfiles.includes(p.id));
 
     setIsLoading(true);
 
@@ -442,9 +448,27 @@ export function DiffProfiles() {
     <div className={styles.container}>
       <Card>
         <CardHeader
-          title="Select Profiles to Compare"
-          description="Choose at least 2 profiles or leave empty to compare all"
+          title="Compare Profiles"
+          description="Select at least 2 profiles to compare"
         />
+
+        <div className={styles.profileHeader}>
+          <label className={styles.label}>
+            Target Profiles
+            <span className={styles.hint}>
+              ({selectedProfiles.length} selected)
+            </span>
+          </label>
+          <button
+            type="button"
+            className={styles.selectAllButton}
+            onClick={handleSelectAll}
+          >
+            {selectedProfiles.length === profiles.length
+              ? 'Deselect All'
+              : 'Select All'}
+          </button>
+        </div>
 
         <div className={styles.profileGrid}>
           {profiles.map((profile) => (
@@ -491,7 +515,12 @@ export function DiffProfiles() {
         {error && <p className={styles.error}>{error}</p>}
 
         <div className={styles.actions}>
-          <Button onClick={fetchData} isLoading={isLoading} size="large">
+          <Button
+            onClick={fetchData}
+            isLoading={isLoading}
+            disabled={selectedProfiles.length < 2}
+            size="large"
+          >
             {isLoading ? 'Loading...' : 'Compare Profiles'}
           </Button>
         </div>
