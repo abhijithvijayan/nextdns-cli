@@ -213,13 +213,26 @@ nextdns-manager copy -s "source-api-key" -d "dest-api-key" -p "a1b2c3"
 
 ## Web App
 
-A Next.js web application is available in `source/web/` that provides a graphical interface for all CLI features.
+A Next.js web application is also available that provides a graphical interface for all CLI features.
+
+**Live Demo:** [nextdns.abhijithvijayan.in](https://nextdns.abhijithvijayan.in)
+
+### Features
+
+- **Manage Domain** - Add, remove, enable, or disable domains from allowlist/denylist with a visual interface
+- **Sync Lists** - Sync domains across profiles with real-time progress tracking and dry-run preview
+- **Diff Profiles** - Compare profiles side-by-side with color-coded differences
+- **Copy Profile** - Clone profiles between accounts with visual feedback
+
+### Self-Hosting
 
 ```sh
 cd source/web
 npm install
 npm run dev
 ```
+
+The web app stores your API key locally in your browser - it's never sent to any server other than NextDNS.
 
 ## Fields Copied
 
