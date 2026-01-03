@@ -61,6 +61,7 @@ export function LoginForm() {
                 >
                   my.nextdns.io/account
                 </a>
+                . Your key is never shared with any server other than NextDNS.
               </span>
             }
             fullWidth
