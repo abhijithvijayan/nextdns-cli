@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextDNS Manager Web
 
-## Getting Started
+A Next.js web application that provides a graphical interface for managing NextDNS profiles.
 
-First, run the development server:
+**Live Demo:** [nextdns.abhijithvijayan.in](https://nextdns.abhijithvijayan.in)
 
-```bash
+## Features
+
+- **Manage Domain** - Add, remove, enable, or disable domains from allowlist/denylist with a visual interface
+- **Sync Lists** - Sync domains across profiles with real-time progress tracking and dry-run preview
+- **Diff Profiles** - Compare profiles side-by-side with color-coded differences
+- **Copy Profile** - Clone profiles between accounts with visual feedback
+
+## Privacy
+
+Your API key is stored locally in your browser's localStorage. It is never sent to any server other than the official NextDNS API.
+
+## Development
+
+### Prerequisites
+
+- Node.js 20 or later
+- npm
+
+### Local Development
+
+```sh
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run build
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+### Cloudflare Pages (Recommended)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app is configured for deployment on Cloudflare Pages using Wrangler.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+# Preview locally with Wrangler
+npm run cf:dev
 
-## Deploy on Vercel
+# Deploy to Cloudflare
+npm run deploy
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The `wrangler.toml` file contains the Cloudflare deployment configuration:
+
+```toml
+name = "nextdns-manager"
+main = "worker/index.ts"
+
+[build]
+command = "npx next telemetry disable && npm run build"
+
+[assets]
+directory = "./out"
+```
+
+### Other Platforms
+
+The app exports as static HTML and can be deployed to any static hosting provider:
+
+- Vercel
+- Netlify
+- GitHub Pages
+- Any static file server
+
+After running `npm run build`, the static files are generated in the `out/` directory.
+
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org/) - React framework
+- [React 19](https://react.dev/) - UI library
+- [Sass](https://sass-lang.com/) - CSS preprocessor
+- [Cloudflare Pages](https://pages.cloudflare.com/) - Hosting

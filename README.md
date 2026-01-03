@@ -234,6 +234,8 @@ npm run dev
 
 The web app stores your API key locally in your browser - it's never sent to any server other than NextDNS.
 
+See the [Web App README](source/web/README.md) for detailed setup, deployment (Cloudflare, Vercel, etc.), and configuration instructions.
+
 ## Fields Copied
 
 ### Security
