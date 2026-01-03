@@ -34,11 +34,15 @@
   - [Diff Profiles](#diff-profiles)
   - [Copy Profile](#copy-profile)
 - [Web App](#web-app)
+- [Fields Copied](#fields-copied)
+- [Schema Validation](#schema-validation)
 - [API Documentation](#api-documentation)
 - [Issues](#issues)
 - [License](#license)
 
 ## Features
+
+**Web App Available:** [nextdns.abhijithvijayan.in](https://nextdns.abhijithvijayan.in) - No installation required!
 
 - **Manage domains across all profiles** - Add, remove, enable, or disable domains from allowlist/denylist across all profiles with a single command
 - **Sync denylist/allowlist across profiles** - Automatically sync domains across all profiles using majority voting
@@ -55,7 +59,7 @@
 
 ## Installation
 
-Requires Node.js 18 or later.
+Requires Node.js 20 or later.
 
 ```sh
 npm install -g nextdns-manager-cli
