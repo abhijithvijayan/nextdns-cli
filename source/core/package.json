@@ -4,16 +4,16 @@
   "private": true,
   "description": "Shared core library for NextDNS Manager",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf lib && tsc",
     "dev": "tsc --watch"
   },
   "devDependencies": {
@@ -24,6 +24,6 @@
     "node": ">=20"
   },
   "files": [
-    "dist"
+    "lib"
   ]
 }

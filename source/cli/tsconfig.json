@@ -4,7 +4,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
-    "outDir": "./dist",
+    "outDir": "./lib",
     "rootDir": "..",
     "strict": true,
     "esModuleInterop": true,
@@ -16,5 +16,5 @@
     "sourceMap": true
   },
   "include": ["source/**/*", "../core/**/*"],
-  "exclude": ["node_modules", "dist", "**/__tests__/**"]
+  "exclude": ["node_modules", "lib", "**/__tests__/**"]
 }

@@ -9,4 +9,8 @@
 
 # Node.js
 node_modules
-dist
+
+# Build outputs
+source/cli/lib
+source/core/lib
+source/web/.next
