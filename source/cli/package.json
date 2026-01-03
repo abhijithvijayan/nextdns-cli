@@ -1,6 +1,6 @@
 {
   "name": "nextdns-manager-cli",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "CLI tool for managing NextDNS profiles",
   "license": "MIT",
   "repository": "https://github.com/abhijithvijayan/nextdns-manager.git",
@@ -32,8 +32,7 @@
     "test:watch": "NODE_OPTIONS='--experimental-vm-modules' jest --watch",
     "pack:list": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
     "prepack": "cp ../../README.md .",
-    "postpack": "rm README.md",
-    "prepublishOnly": "npm run pack:list"
+    "postpublish": "rm -f README.md"
   },
   "dependencies": {
     "commander": "^12.1.0"
